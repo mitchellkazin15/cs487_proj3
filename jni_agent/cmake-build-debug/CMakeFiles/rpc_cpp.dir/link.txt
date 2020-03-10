@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/rpc_cpp.dir/main.cpp.o  -o rpc_cpp -pthread 
