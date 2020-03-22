@@ -8,4 +8,4 @@ CMDImpl:
 	export LD_LIBRARY_PATH=.
 
 clean:
-	rm -rf *.class *.o *.so
+	rm -rf *.class
