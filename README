@@ -1,0 +1,38 @@
+To build the entire project, type 'make' in the same directory as this README. To remove *.class, *.o, and *.so type 'make clean'
+
+agent:
+	src files:
+	    Beacon.java
+	    CmdAgent.java
+	    CmdRegister.java
+	    src_CmdRegsiter.h
+	    CMDImpl.c
+
+    The Agent design for this project uses RMI to send a beacon every 2 seconds to the BeaconListener thread in Manager. Meanwhile it starts its own RMI registry and waits for commands from the manager. When it receives a command it uses JNI to have C code execute the commands. The library that is linked is src/libCMDImpl.so created from CMDImpl.c.
+
+	To run this, after typing 'make', type 'make agent'. You will then be prompted to type a Destination and Local IP. Press enter twice if you want to use localhost.
+
+manager:
+	src files:
+		Agent.java
+		AgentMonitor.java
+		BeaconListener.java
+		CMDObject.java
+		GetLocalOS.java
+		GetLocalTime.java
+		RPCManager.java
+
+	The manager design follows the same design as my last project. It acts as a simple shell allowing you to execute commands on different agents it has recognized from BeaconListener thread that starts an RMI registry and waits for beacons.
+
+	In order to see the agents that have connected and if they are alive or dead, type 'ls' when prompted for a command. To execute an RMI call, type either 'time' or 'os' followed by the agent number. Note agent number is not the same as agent ID. First agent connected will be agent 0 so to get that agents local time type 'time 0'.
+
+	When and RMI command is typed, a new object is created of either GetLocalTime or GetLocalOS. These get added to the same RMI registry as BeaconListener and wait for the agent to remotely call the response method with Integer time or String OS.
+
+	To run the java side, after typing 'make', type 'make manager' to run the main class.
+
+
+
+
+
+
+
